@@ -4,9 +4,11 @@ const getUsers = () => {
 }
 
 const createUser = user => {
-    fetch(`http://localhost:9000/users/new/${user.name}-${user.email}`, {method: 'POST'})
-        .then(res => res.text())
-        .then(res => res);
+    return new Promise(resolve => {
+        fetch(`http://localhost:9000/users/new/${user.name}-${user.email}`, {method: 'POST'})
+        .then(res => resolve(res.json()));
+    });
+    
 }
 
 const editUser = user => {
@@ -15,8 +17,15 @@ const editUser = user => {
         .then(res => res);
 }
 
+const removeUser = userId => {
+    fetch(`http://localhost:9000/users/${userId}`, {method: 'DELETE'})
+    .then(res => res.text())
+    .then(res => console.log(res));
+}
+
 module.exports = {
     getUsers,
     createUser,
-    editUser
+    editUser,
+    removeUser
 }

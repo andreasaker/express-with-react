@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import AddUserForm from './AddUserForm';
 import EditUserForm from './EditUserForm';
-import {getUsers} from './UserQueries';
+import {getUsers, removeUser} from './UserQueries';
 
 const UserList = () => {
     //Socket.io får bli ett senare projekt
@@ -15,13 +15,24 @@ const UserList = () => {
     const [edit, setEdit] = useState(false);
     const [user, setUser] = useState({});
 
-    const updateUsers = () => {
-      getUsers().then(res => setUsers(res)); // lägg till sockets
+    const addUser = newUser => {
+        setUsers([...users, newUser]);
     }
 
-    const handleEdit = target => {
+    const updateUsers = updatedUser => {
+      let newUsers = users.map(u => u.id === updatedUser.id ? updatedUser : u);
+      setUsers(newUsers);
+    }
+
+    const handleEditUser = target => {
         setUser(target);
         setEdit(true);
+    }
+
+    const handleRemove = targetId => {
+        removeUser(targetId);
+        let newUsers = users.filter(u => u.id !== targetId);
+        setUsers(newUsers);
     }
 
     useEffect(() => {
@@ -45,7 +56,7 @@ const UserList = () => {
                     <tr key={u.id}>
                     <td>{u.name}</td>
                     <td>{u.email}</td>
-                    <td><button onClick={() => handleEdit(u)}>Edit</button> <button>Delete</button></td>
+                    <td><button onClick={() => handleEditUser(u)}>Edit</button> <button onClick={() => { handleRemove(u.id)}}>Delete</button></td>
                     </tr>    
                 )}
                 </tbody>
@@ -55,7 +66,7 @@ const UserList = () => {
                 {edit ? (
                  <EditUserForm user={user} updateUsers={updateUsers} setEdit={setEdit}/>
                 ) : (
-                 <AddUserForm updateUsers={updateUsers}/>
+                 <AddUserForm addUser={addUser} />
                 )}
             </div>
         </div>

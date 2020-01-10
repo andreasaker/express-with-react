@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import {createUser} from './UserQueries';
 
 const AddUserForm = props => {
-    const initUser = {name: "", email: ""}
+    const initUser = {id: null, name: "", email: ""}
     const[user, setUser] = useState(initUser);
 
     let handleChange = e =>{
@@ -11,8 +11,8 @@ const AddUserForm = props => {
     }
 
     let handleSubmit = e =>{
-        createUser(user);
-        props.updateUsers();
+        createUser(user).then(res=> setUser({...user, id: res.id}));
+        props.addUser(user);
         setUser(initUser);
         e.preventDefault();
     }

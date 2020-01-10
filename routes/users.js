@@ -31,12 +31,15 @@ router.get('/:id', function(req, res, next){
 
 router.post('/new/:name-:email', function(req,res,next){
   let {name, email} = req.params;
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
+  pool.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id', [name, email], (error, results) => {
     if(error){
       throw error;
-    }
-  res.status(201).send(`user added with ID: ${results.insertId}`);
+    } 
+    console.log(`user added successfully id: ${results.rows[0].id}`)
+    res.status(201).json(results.rows[0]);
   });
+ 
+  
 });
 
 router.put('/edit/:id-:name-:email', function(req,res,next){
@@ -47,6 +50,16 @@ router.put('/edit/:id-:name-:email', function(req,res,next){
     }
   res.status(200).send(`user edited with ID: ${id}`);
   });
+});
+
+router.delete('/:id', function(req,res){
+  let {id} = req.params;
+  pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) =>{
+    if(error){
+      throw error;
+    }
+    res.status(200).send(`User deleted successfully with id: ${id}`);
+  })
 });
 
 module.exports = router;

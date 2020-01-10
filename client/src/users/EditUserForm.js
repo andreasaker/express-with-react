@@ -1,9 +1,14 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {editUser} from './UserQueries';
 
 const EditUserForm = props => {
     
     const[user, setUser] = useState(props.user);
+
+    useEffect(() => {
+        setUser(props.user);
+    },[props.user]);
+
 
     let handleChange = e =>{
         const{name, value} = e.target;
@@ -13,7 +18,7 @@ const EditUserForm = props => {
     let handleSubmit = e =>{
         editUser(user);
         props.setEdit(false); 
-        props.updateUsers(); 
+        props.updateUsers(user); 
         e.preventDefault();
     }
 
