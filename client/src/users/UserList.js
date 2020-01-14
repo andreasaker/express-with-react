@@ -4,16 +4,10 @@ import EditUserForm from './EditUserForm';
 import {getUsers, removeUser} from './UserQueries';
 
 const UserList = () => {
-    //Socket.io får bli ett senare projekt
-    //let socket = require('socket.io-client')('http://localhost:9000');
-    //socket.on('connect', function(){});
-    //socket.on('event', function(data){});
-    //socket.on('disconnect', function(){});
-
 
     const [users, setUsers] = useState([]);
     const [edit, setEdit] = useState(false);
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({id: null});
 
     const addUser = newUser => {
         setUsers([...users, newUser]);
@@ -27,6 +21,7 @@ const UserList = () => {
     const handleEditUser = target => {
         setUser(target);
         setEdit(true);
+        console.log("Editing")
     }
 
     const handleRemove = targetId => {
@@ -39,6 +34,15 @@ const UserList = () => {
         getUsers().then(res => setUsers(res));
     }, []);
     
+
+
+    const toggleButtons = e => {
+        console.log(e.target.parentElement.id);
+        let parent = document.getElementById(e.target.parentElement.id)
+        let Child = <tr><td>HAJ</td><td></td><td></td></tr>;
+        //parent.insertAdjacentHTML('afterend', "" );
+        //eBtn.disabled = !eBtn.disabled;
+    }
 
     return(
         <div className="userList">
@@ -53,21 +57,24 @@ const UserList = () => {
                 </thead>
                 <tbody>
                 {users.map(u => 
-                    <tr key={u.id}>
+                    user.id === u.id && edit ? (
+                        <tr key={u.id}>
+                            <EditUserForm user={user} updateUsers={updateUsers} setEdit={setEdit} handleRemove={handleRemove} />
+                            <td><button className="delBtn"  onClick={() => { handleRemove(u.id)}}>Delete</button></td>
+                        </tr>
+                    ):(
+                    <tr key={u.id} id={`user-row-${u.id}`} >
                     <td>{u.name}</td>
                     <td>{u.email}</td>
-                    <td><button onClick={() => handleEditUser(u)}>Edit</button> <button onClick={() => { handleRemove(u.id)}}>Delete</button></td>
-                    </tr>    
+                    <td><button className="editBtn" onClick={() => handleEditUser(u)}>Edit</button> </td>
+                    </tr>
+                    )
                 )}
                 </tbody>
             </table>    
             </div>
             <div className="row-2">
-                {edit ? (
-                 <EditUserForm user={user} updateUsers={updateUsers} setEdit={setEdit}/>
-                ) : (
                  <AddUserForm addUser={addUser} />
-                )}
             </div>
         </div>
         

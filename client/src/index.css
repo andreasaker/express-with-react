@@ -66,9 +66,59 @@ body {
   grid-row-start: 2;
 }
 
-
-
 table tbody tr{
-  height: 1.7em;
+  height: 2em;
 }
+
+.userList table{
+  width: 100%;
+  border-spacing: 0;
+}
+
+.editUserName{
+  width: 22vw;
+}
+
+.editUserEmail{
+  width: 36vw;
+}
+
+.userList table td{
+  border: 0;
+}
+
+.userList table tr:nth-child(even){
+  background-color: #6c7b9f;
+}
+
+.userList button{
+  color: #536182;;
+  height: 20px;
+  border-radius: 4px;
+  border: 0;
+  background-color: white;
+  cursor: pointer;
+}
+.userList button:disabled {
+  display: none;
+}
+.userList button:hover{
+  color: white;
+  background-color: #ffffff30;
+}
+
+.userList button:active{
+  border: 1px;
+  border-color: #536182;
+  transform: translateY(2px);
+  color: #536182;
+  background-color: white;
+}
+
+.userList td button{
+  float: right;
+  margin: 0 0 0 8px;
+}
+
+
 
