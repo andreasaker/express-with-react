@@ -19,15 +19,9 @@ const AddUserForm = props => {
 
     return(
         <form onSubmit={handleSubmit}>
-            <h2>Add User</h2>
-            <p><label>Name:</label>
-            <input type="text" name="name" onChange={handleChange} value={user.name}/>
-            </p>
-            <p>
-            <label>Email:</label>
-            <input type="text" name="email" onChange={handleChange} value={user.email}/>
-            </p>
-            <button type="submit">Submit</button>
+            <input className="inputUserName" type="text" name="name" onChange={handleChange} value={user.name} placeholder="Name"/>
+            <input className="inputUserEmail" type="text" name="email" onChange={handleChange} value={user.email} placeholder="Email"/>
+            <button type="submit">Create new user</button>
         </form>
     );
 }

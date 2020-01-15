@@ -26,8 +26,8 @@ const EditUserForm = props => {
         
         <td colSpan="2">
         <form onSubmit={handleSubmit}>
-            <input className="editUserName" type="text" name="name" onChange={handleChange} value={user.name}/>
-            <input className="editUserEmail" type="text" name="email" onChange={handleChange} value={user.email}/>
+            <input className="inputUserName" type="text" name="name" onChange={handleChange} value={user.name}/>
+            <input className="inputUserEmail" type="text" name="email" onChange={handleChange} value={user.email}/>
             <button type="submit">Submit</button>
         </form>
         </td>

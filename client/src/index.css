@@ -1,7 +1,7 @@
 body {
   font-family: 'Questrial', sans-serif;
   margin: 0;
-  color:white;
+  color:#eee;
   background-color: #536182;
 }
 
@@ -38,7 +38,7 @@ body {
 }
 
 .menu a{
-  color: white;
+  color: #eee;
 }
 
 .menu a:hover{
@@ -67,38 +67,42 @@ body {
 }
 
 table tbody tr{
-  height: 2em;
+  height: 11vw;
 }
 
 .userList table{
   width: 100%;
   border-spacing: 0;
+  overflow-x: auto;
 }
 
-.editUserName{
-  width: 22vw;
-}
-
-.editUserEmail{
-  width: 36vw;
-}
+.inputUserName{ width: 23vw; }
+.inputUserEmail{ width: 32vw; }
 
 .userList table td{
-  border: 0;
+  overflow: hidden;
+  padding-left: 1vw; 
 }
+
+.tdA{ max-width: 10vw; }
+.tdB{ max-width: 20vw; }
+.tdC{ max-width: 7vw; }
 
 .userList table tr:nth-child(even){
   background-color: #6c7b9f;
 }
 
-.userList button{
-  color: #536182;;
-  height: 20px;
+button{
+  color: #536182;
+  height: 10vw;
   border-radius: 4px;
   border: 0;
-  background-color: white;
+  border-bottom: 2px solid;
+  border-color: #c1cbce;
+  background-color: #eceff0;
   cursor: pointer;
 }
+
 .userList button:disabled {
   display: none;
 }
@@ -117,8 +121,17 @@ table tbody tr{
 
 .userList td button{
   float: right;
-  margin: 0 0 0 8px;
+  margin: 1px 0 0 8px;
 }
 
 
+.userList input {
+  height: 8vw;
+  background-color: #eceff0;
+  border: 0;
+  margin: 1vw;
+  border-radius: 4px;
+  padding-left: 1vw;
+  color: #536182;
+}
 
