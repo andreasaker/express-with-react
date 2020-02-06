@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     if (error) {
       throw error;
     }
-  res.status(200).json(results.rows)
+  res.status(200).json(results.rows);
   });
 });
 

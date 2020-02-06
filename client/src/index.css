@@ -112,11 +112,12 @@ button{
 }
 
 .userList button:active{
-  border: 1px;
-  border-color: #536182;
+  border-top: 2px solid;
+  border-bottom: 0px solid;
+  border-color: #c1cbce;
   transform: translateY(2px);
   color: #536182;
-  background-color: white;
+  background-color: #eceff0;
 }
 
 .userList td button{

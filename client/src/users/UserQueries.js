@@ -8,7 +8,6 @@ const createUser = user => {
         fetch(`http://localhost:9000/users/new/${user.name}-${user.email}`, {method: 'POST'})
         .then(res => resolve(res.json()));
     });
-    
 }
 
 const editUser = user => {
