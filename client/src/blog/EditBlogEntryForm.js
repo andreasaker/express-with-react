@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import { createBlogEntry } from './BlogQueries';
+import { editBlogEntry } from './BlogQueries';
 import {getUsers} from '../users/UserQueries';
 
-const AddBlogEntryForm = props => {
+const EditBlogEntryForm = props => {
 
     const initEntry = {id: null, entry_name: "", title: "", content: "", img_link: "", user_id: null};
-    let [entry, setEntry] = useState(initEntry);
+    let [entry, setEntry] = useState(props);
     let [users, setUsers] = useState([]);
 
     useEffect(()=>{
@@ -22,10 +22,8 @@ const AddBlogEntryForm = props => {
     }
 
     let handleSubmit = e =>{
-        
-        createBlogEntry(entry).then(res => setEntry({...entry, id: res.id}));
-        props.addNewEntry(entry);
-        setEntry(initEntry);
+        editBlogEntry(entry);
+        props.editEntry(entry);
         e.preventDefault();
     }
 
@@ -34,7 +32,7 @@ const AddBlogEntryForm = props => {
     return(
         <form onSubmit={handleSubmit}>
                 <select name="user_id" onChange={e=>{handleChange(e)}}>
-                    <option defaultValue >- Choose -</option>  
+                    <option>- Choose -</option>  
                     {users.map(u =>
                         <option key={u.id} value={u.id}>{u.name}</option>    
                     )}
@@ -47,7 +45,7 @@ const AddBlogEntryForm = props => {
     );
 }
 
-export default AddBlogEntryForm;
+export default EditBlogEntryForm;
 
-//Borde flytta upp alla kall till App.js
-//Lägg till så namn syns och sparas
+
+//Not Done!

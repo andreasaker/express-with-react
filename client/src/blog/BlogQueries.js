@@ -10,6 +10,12 @@ const createBlogEntry = entry => {
     .then(res => res.json());
 }
 
+const editBlogEntry = entry => {
+    fetch(`http://localhost:9000/users/edit/${entry.id}-${entry.title}-${entry.content}-${entry.img_link}-${entry.user_id}`, {method: 'PUT'})
+        .then(res => res.text())
+        .then(res => res);
+}
+
 const deleteBlogEntry = id => {
     return fetch(`http://localhost:9000/blogentries/${id}`, {method: 'DELETE'})
     .then(res => res.text())
@@ -19,5 +25,6 @@ const deleteBlogEntry = id => {
 module.exports = {
     getBlogEntries,
     createBlogEntry,
+    editBlogEntry,
     deleteBlogEntry
 }

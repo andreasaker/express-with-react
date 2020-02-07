@@ -136,3 +136,6 @@ button{
   color: #536182;
 }
 
+.entryOptions button{
+  margin-right: 1em;
+}

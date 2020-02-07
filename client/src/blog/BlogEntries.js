@@ -18,6 +18,10 @@ const BlogEntries = () => {
         }
     }
 
+    const handleEdit = target => {
+        
+    }
+
     
     useEffect(()=>{
         getBlogEntries().then(res => setBlogEntries(res));
@@ -41,6 +45,7 @@ const BlogEntries = () => {
                         </div>
                     <div className="entryOptions">
                         <button className="delBtn" onClick={() => handleRemove(entry)}>Remove</button>
+                        <button className="editBtn" onClick={() => handleEdit(entry)}>Edit</button>
                     </div> 
                     </div>
                 )

@@ -58,33 +58,25 @@ const UserList = () => {
                     user.id === u.id && edit ? (
                         <tr key={u.id}>
                             <EditUserForm user={user} updateUsers={updateUsers} setEdit={setEdit} handleRemove={handleRemove} />
-                            
-                            <td>
-                                <button className="closeBtn" onClick={() => handleCloseEdit()} >Close</button>
-                            </td>
+                            <td> <button className="closeBtn" onClick={() => handleCloseEdit()} >Close</button> </td>
                         </tr>
                     ):(
                     <tr key={u.id} id={`user-row-${u.id}`}>
-                    <td className="tdA" onClick={() => handleEditUser(u)}> {u.name} </td>
-                    <td className="tdB" onClick={() => handleEditUser(u)}> {u.email} </td>
-                    <td className="tdC">
-                        {!edit &&
-                        <button className="delBtn"  onClick={() => { handleRemove(u)}}>Delete</button>
-                        }
-                    </td>
+                        <td className="tdA" onClick={() => handleEditUser(u)}> {u.name} </td>
+                        <td className="tdB" onClick={() => handleEditUser(u)}> {u.email} </td>
+                        <td className="tdC">
+                            {!edit &&
+                            <button className="delBtn"  onClick={() => { handleRemove(u)}}>Delete</button>
+                            }
+                        </td>
                     </tr>
                     )
                 )}
                 <tr>
-                    <td colSpan="3">
-                        <AddUserForm addUser={addUser} />
-                    </td>
+                    <td colSpan="3"> <AddUserForm addUser={addUser} /> </td>
                 </tr>
                 </tbody>
             </table>    
-            </div>
-            <div className="row-2">
-                 
             </div>
         </div>
         
