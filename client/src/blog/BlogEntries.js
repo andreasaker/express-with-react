@@ -1,13 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useReducer} from 'react';
 import { getBlogEntries, deleteBlogEntry } from './BlogQueries';
 import AddBlogEntryForm from './AddBlogEntryForm';
+import EditBlogEntry from './EditBlogEntryForm';
 
 const BlogEntries = () => {
 
     let [blogEntries, setBlogEntries] = useState([]);
-    
+    let [edit, setEdit] = useState(false);
+    let [editedEntry, setEditedEntry] = useState({id: null});
+
     const addNewEntry = entry => {
         setBlogEntries([...blogEntries, entry]);
+    }
+
+    const editBlogEntry = updatedEntry => {
+        let newEntries = blogEntries.map(e => e.id === updatedEntry.id ? updatedEntry : e)
+        setBlogEntries(newEntries);
+        setEdit(false);
     }
 
     const handleRemove = target => {
@@ -19,7 +28,8 @@ const BlogEntries = () => {
     }
 
     const handleEdit = target => {
-        
+        setEditedEntry(target)
+        setEdit(true);
     }
 
     
@@ -31,7 +41,12 @@ const BlogEntries = () => {
     return(
         <div className="blogContent">
             <div className="blogentryform">
-            <AddBlogEntryForm addNewEntry={addNewEntry} />
+                {edit ? (
+                    <EditBlogEntry entry={editedEntry} editBlogEntry={editBlogEntry}/>
+                ):(
+                    <AddBlogEntryForm addNewEntry={addNewEntry} />
+                )}
+            
             </div>
             <div className="bloglist">
             { blogEntries.map(entry => 

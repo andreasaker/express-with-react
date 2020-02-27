@@ -4,8 +4,8 @@ import {getUsers} from '../users/UserQueries';
 
 const EditBlogEntryForm = props => {
 
-    const initEntry = {id: null, entry_name: "", title: "", content: "", img_link: "", user_id: null};
-    let [entry, setEntry] = useState(props);
+    
+    let [entry, setEntry] = useState(props.entry);
     let [users, setUsers] = useState([]);
 
     useEffect(()=>{
@@ -31,7 +31,7 @@ const EditBlogEntryForm = props => {
     
     return(
         <form onSubmit={handleSubmit}>
-                <select name="user_id" onChange={e=>{handleChange(e)}}>
+                <select name="user_id" value={entry.user_id} onChange={e=>{handleChange(e)}}>
                     <option>- Choose -</option>  
                     {users.map(u =>
                         <option key={u.id} value={u.id}>{u.name}</option>    
@@ -40,7 +40,7 @@ const EditBlogEntryForm = props => {
                 <input type="text" name="title" placeholder="Title" onChange={e=>{handleChange(e)}} value={entry.title}></input>
                 <input type="text" name="content" placeholder="Content" onChange={e=>{handleChange(e)}} value={entry.content}></input>
                 <input type="text" name="img_link" placeholder="Image link" onChange={e=>{handleChange(e)}} value={entry.img_link}></input>
-                <button type="submit">Create</button>
+                <button type="submit">Update entry</button>
         </form>
     );
 }
