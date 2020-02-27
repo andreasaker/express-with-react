@@ -1,9 +1,9 @@
 Express, Postgresql, ReactJS<br />
 <br />
-.env file needen with:<br />
+.env file needed with:<br />
 DB_USER<br />
 DB_HOST<br />
-DB_DATABASE<br />
+DB_DATABASE (name)<br />
 DB_PASSWORD<br />
 DB_PORT
 
